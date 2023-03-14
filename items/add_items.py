@@ -5,7 +5,6 @@ cursor = None
 
 try:
     connection = mysql.connector.connect(user='root', host='127.0.0.1', database='suunnittelutehtava3')
-    # dictionary=True ja pystyt käyttämään tietokannan sarakkeita numeerisen indeksen sijaan
     cursor = connection.cursor(dictionary=True, prepared=True)
 
     name = input("Anna lisättävän itemin nimi: ")

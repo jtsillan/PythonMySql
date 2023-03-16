@@ -22,7 +22,7 @@ try:
             print(f"({count}) Nimi: {item['name']}, Vuosi: {item['year']}, Tyyppi: {item['item_type']}, Kesto: {item['duration']} min, Ikäraja: {item['age_limit']}")
 
         choice = input("Valitse yllä olevista vaihtoehdoista: (0), (1), jne: ")
-        review = input("Anna itemille arvostelu: (1)1p (2)1.5p (3)2p (4)2.5p (5)3p (6)3.5p (7)4p (8)4.5p (9)5p ")
+        review = input("Anna itemille arvostelu: 1 / 1.5 / 2 / 2.5 / 3 / 3.5 / 4 / 4.5 / 5 : ")
         user_email = input("Anna käyttäjän sähköposti: ")
         check_email_query = ("SELECT * FROM users WHERE email = (%s)")
         cursor.execute(check_email_query, (user_email, ))
@@ -34,8 +34,8 @@ try:
             item_id = items[int(choice)]['id']
             user_id = user[0]['id']
             
-            add_query = ("INSERT INTO items_has_reviews(items_id, reviews_id, users_id) VALUES((%s), (%s), (%s))")
-            cursor.execute(add_query, (item_id, review, user_id ))
+            add_query = ("INSERT INTO reviews(review, users_id, items_id) VALUES((%s), (%s), (%s))")
+            cursor.execute(add_query, (review, user_id, item_id))
             connection.commit()
 
             if cursor.rowcount == 1:

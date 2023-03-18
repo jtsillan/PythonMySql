@@ -22,6 +22,7 @@ try:
 
     # Item is found from database
     else:
+        # Print all items
         for count, item in enumerate(items):
             print(f"({count}) Nimi: {item['name']}, Vuosi: {item['year']}, Tyyppi: {item['item_type']}, Kesto: {item['duration']} min, Ikäraja: {item['age_limit']}")
 

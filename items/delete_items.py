@@ -14,16 +14,18 @@ try:
 
     items = cursor.fetchall()
 
+    print(items)
+
     if items == []:
         print("Kohdetta ei löytynyt")
     else:
         for count, item in enumerate(items):
-            print(f"({count}) {item['name']}, {item['year']}")
+            print(f"({count}) {item['name']}, {item['year']}, {item['item_type']}")
 
         choice = input("Valitse yllä olevista vaihtoehdoista: (0), (1), jne: ")
         del_choice = items[int(choice)]['id']
         
-        query = ("DELETE FROM items WHERE id = (%s);")
+        query = ("DELETE FROM items WHERE items.id = (%s);")
         cursor.execute(query, (del_choice, ))
         connection.commit()
 

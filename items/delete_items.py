@@ -14,8 +14,6 @@ try:
 
     items = cursor.fetchall()
 
-    print(items)
-
     if items == []:
         print("Kohdetta ei löytynyt")
     else:

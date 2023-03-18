@@ -57,7 +57,7 @@ try:
             connection.commit()
 
             if cursor.rowcount == 1:
-                print(f"Itemille {name} annettu arvio.")
+                print(f"Itemille '{items[int(choice)]['name']}' annettu arvio.")
 
 
 except mysql.connector.Error as e:

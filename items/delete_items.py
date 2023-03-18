@@ -25,7 +25,7 @@ try:
         choice = input("Valitse yllä olevista vaihtoehdoista: (0), (1), jne: ")
         del_choice = items[int(choice)]['id']
         
-        query = ("DELETE FROM items WHERE items.id = (%s);")
+        query = ("DELETE FROM items WHERE id = (%s);")
         cursor.execute(query, (del_choice, ))
         connection.commit()
 

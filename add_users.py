@@ -10,9 +10,13 @@ try:
     email = input("Anna sähköposti: ")
     first_name = input("Anna etunimi: ")
     last_name = input("Anna sukunimi: ")
+    order_type = input("Valitse tilaustyyppi: (1) Standard, (2) Premium ")
+    start_date = input("Anna alkamispäivä: (YYYY-MM-DD) ")
 
-    query = ("INSERT INTO users(email, first_name, last_name) VALUES((%s), (%s), (%s));")
-    cursor.execute(query, (email, first_name, last_name))
+    order_query = ("INSERT INTO orders(start_date, order_type_id) VALUES((%s), (%s));")
+    cursor.execute(order_query, (start_date, order_type))
+    user_query = ("INSERT INTO users(email, first_name, last_name, orders_id) VALUES((%s), (%s), (%s), (%s));")
+    cursor.execute(user_query, (email, first_name, last_name, cursor.lastrowid))
     connection.commit()
 
     print("Lisätyn käyttäjän id on: ", cursor.lastrowid)

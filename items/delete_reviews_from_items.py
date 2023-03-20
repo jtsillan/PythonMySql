@@ -53,7 +53,7 @@ try:
                 print(f"Itemiltä '{items[int(choice)]['name']}' poistettu arvio.")
 
             else:
-                print("Hups, joptain meni hassusti")
+                print("Hups, jotain meni hassusti")
 
 
 except mysql.connector.Error as e:

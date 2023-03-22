@@ -28,7 +28,7 @@ try:
         items = cursor.fetchall()
 
         if items == []:
-            print("Itemissä ei ole näyttelijöitä")
+            print("Käyttäjällä ei ole katsottuja itemeitä")
         else:
             for i in items:
                 print(f"Nimi: {i['name']}, Vuosi: {i['year']}")

@@ -7,16 +7,16 @@ try:
     connection = mysql.connector.connect(user='root', host='127.0.0.1', database='suunnittelutehtava3')
     cursor = connection.cursor(dictionary=True, prepared=True)
 
-    # TODO: fix query || NOT WORKING NOW!
-    query = ("SELECT items_has_reviews.*, (SELECT AVG(review) FROM items_has_reviews INNER JOIN items ON items_has_reviews.items_id = items.id INNER JOIN"
-             " reviews ON items_has_reviews.reviews_id = reviews.id WHERE items_has_reviews.items_id = items.id) AS avg_review FROM items_has_reviews INNER JOIN items ON items_has_reviews.items_id = items.id GROUP BY items.id ORDER BY avg_review DESC LIMIT 10;")    
+    # Big up for Mr. Guru for fixing this query!
+    query = ("SELECT items.*, item_types.*, AVG(review) AS avg_review FROM items INNER JOIN items_has_reviews ON"
+             " items.id = items_has_reviews.items_id INNER JOIN reviews ON reviews.id = items_has_reviews.reviews_id INNER JOIN item_types ON items.item_types_id = item_types.id GROUP BY"
+              " items.id, items.name, items.year ORDER BY avg_review DESC LIMIT 10;")    
     cursor.execute(query)
    
     items = cursor.fetchall()
 
     for item in items:
-        print(item)
-        #print(f"Nimi: {item['name']}, Vuosi: {item['year']}, Tyyppi: {item['item_type']}, Kesto: {item['duration']} min, Ikäraja: {item['age_limit']} v")
+        print(f"Nimi: {item['name']}, Vuosi: {item['year']}, Tyyppi: {item['item_type']}, Arvostelu: {round(item['avg_review'], 1)} p")
 
 
 except mysql.connector.Error as err:

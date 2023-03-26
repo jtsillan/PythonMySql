@@ -9,17 +9,18 @@ try:
 
     _id = input("Anna itemin id: ")
 
-    # TODO: FIX QUERY || NOT WORKING NOW!
-    query = ("SELECT * FROM items WHERE id IN (SELECT items_id FROM items_has_reviews WHERE items_id = (%s)) ORDER BY id")
+    query = ("SELECT items.*, AVG(review) AS avg_review FROM items INNER JOIN items_has_reviews ON items.id = items_has_reviews.items_id INNER JOIN reviews ON reviews.id = items_has_reviews.reviews_id WHERE items.id = (%s);")
     cursor.execute(query, (_id, ))
 
     item = cursor.fetchone()
 
     if item is None:
         print("Kohdetta ei löytynyt")
+    elif item['avg_review'] is None:
+        print(f"Nimi: {item['name']}, Vuosi: {item['year']}, Kesto: {item['duration']} min")
+        print("Itemillä ei ole arvostelua")
     else:
-        print(item)
-        #print(f"{item['name']}, {item['year']}, {item['item_type']}")
+        print(f"Nimi: {item['name']}, Vuosi: {item['year']}, Kesto: {item['duration']} min, Arvostelu: {round(item['avg_review'], 1)} p")
 
 
 

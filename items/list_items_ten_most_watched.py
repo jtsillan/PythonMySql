@@ -7,15 +7,15 @@ try:
     connection = mysql.connector.connect(user='root', host='127.0.0.1', database='suunnittelutehtava3')
     cursor = connection.cursor(dictionary=True, prepared=True)
 
-    # TODO: fix query || NOT WORKING NOW!
-    query = ("SELECT COUNT(watch_count) AS watch_count, users_has_items.* FROM users_has_items INNER JOIN items ON users_has_items.items_id = items.id ORDER BY watch_count DESC LIMIT 10;")    
+    # Query fixed, thanks to Mr. Guru again!
+    query = ("SELECT *, item_types.item_type, COUNT(watch_count) AS num_watch FROM items INNER JOIN users_has_items ON items.id = users_has_items.items_id INNER JOIN"
+             " users ON users_has_items.users_id = users.id INNER JOIN item_types ON items.item_types_id = item_types.id GROUP BY items.id ORDER BY watch_count DESC LIMIT 10;")    
     cursor.execute(query)
    
     items = cursor.fetchall()
 
     for item in items:
-        print(item)
-        #print(f"Nimi: {item['name']}, Vuosi: {item['year']}, Tyyppi: {item['item_type']}, Kesto: {item['duration']} min, Ikäraja: {item['age_limit']} v")
+        print(f"Nimi: {item['name']}, Vuosi: {item['year']}, Tyyppi: {item['item_type']}, Näyttökerrat: {item['num_watch']}")
 
 
 except mysql.connector.Error as err:

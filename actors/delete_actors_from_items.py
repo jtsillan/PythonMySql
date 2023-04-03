@@ -42,8 +42,8 @@ try:
             
             item_choice = input("Valitse yllä olevista vaihtoehdoista: (0), (1), jne: ")
             item_id = items[int(item_choice)]['id']
-            delete_query = (f"DELETE FROM items_has_actors WHERE items_id = {item_id} AND actors_id = {actor_id}")
-            cursor.execute(delete_query)
+            delete_query = ("DELETE FROM items_has_actors WHERE items_id = (%s) AND actors_id = (%s)")
+            cursor.execute(delete_query, (item_id, actor_id))
             connection.commit()                    
 
             if cursor.rowcount == 1:

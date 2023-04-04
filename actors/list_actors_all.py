@@ -16,7 +16,7 @@ try:
         print(f"Nimi: {actor['first_name']} {actor['last_name']}, Ikä: {actor['age']} v")
 
 
-except mysql.connector.Error as err:
+except Exception as err:
     print(err)
 
 finally:

@@ -30,6 +30,9 @@ except mysql.connector.Error as e:
     print(e)
     connection.rollback()
 
+except Exception as e:
+    print(e)
+
 finally:
     if cursor is not None:
         cursor.close()

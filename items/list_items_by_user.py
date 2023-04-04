@@ -35,7 +35,7 @@ try:
 
 
 
-except mysql.connector.Error as err:
+except Exception as err:
     print(err)
 
 finally:

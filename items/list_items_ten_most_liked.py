@@ -19,7 +19,7 @@ try:
         print(f"Nimi: {item['name']}, Vuosi: {item['year']}, Tyyppi: {item['item_type']}, Arvostelu: {round(item['avg_review'], 1)} p")
 
 
-except mysql.connector.Error as err:
+except Exception as err:
     print(err)
 
 finally:

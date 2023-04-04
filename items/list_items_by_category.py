@@ -14,12 +14,12 @@ try:
 
     categories = cursor.fetchone()
     # PALAUTE
-    # tämän rivin pitäisi olla vasta elsessä, koska jos categoriaa ei ole, siltä ei löydy id-saraketta
-    category_id = categories['id']
+    # KORJATTU: jäänyt duplikaattina kummittelemaan, oli jo alemapana
 
     if categories is None:
         print("Kategoriaa ei löytynyt")
-    else:        
+    else:     
+        # Oli jo täällä   
         category_id = categories['id']     
         query = ("SELECT items_has_categories.*, items.*, categories.* FROM items_has_categories INNER JOIN items "
                 "ON items_has_categories.items_id = items.id INNER JOIN categories ON items_has_categories.categories_id = categories.id WHERE items_has_categories.categories_id = (%s);")    
@@ -34,7 +34,7 @@ try:
                 print(f"Nimi: {item['name']}, Vuosi: {item['year']}, Kesto: {item['duration']} min")
 
 
-except mysql.connector.Error as err:
+except Exception as err:
     print(err)
 
 finally:

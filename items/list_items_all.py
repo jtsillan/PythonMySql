@@ -17,7 +17,7 @@ try:
         print(f"Nimi: {item['name']}, Vuosi: {item['year']}, Tyyppi: {item['item_type']}, Kesto: {item['duration']} min, Ikäraja: {item['age_limit']} v")
 
 
-except mysql.connector.Error as err:
+except Exception as err:
     print(err)
 
 finally:

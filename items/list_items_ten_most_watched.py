@@ -7,6 +7,11 @@ try:
     connection = mysql.connector.connect(user='root', host='127.0.0.1', database='suunnittelutehtava3')
     cursor = connection.cursor(dictionary=True, prepared=True)
 
+    # PALAUTE
+    # tässä on tullut pieni moka sulla. Mulla on tällä hetkellä yksi rivi users_has_items-taulussa, jossa watch_count on 10
+    # mutta sinun koodi palauttaa Näyttökerrat: 1. Tämä johtuu siitä, että COUNT-funktio palauttaa rivien määrän
+    # SUM-funktio palauttaa katselukerrat
+
     # Query fixed, thanks to Mr. Guru again!
     query = ("SELECT *, item_types.item_type, COUNT(watch_count) AS num_watch FROM items INNER JOIN users_has_items ON items.id = users_has_items.items_id INNER JOIN"
              " users ON users_has_items.users_id = users.id INNER JOIN item_types ON items.item_types_id = item_types.id GROUP BY items.id ORDER BY watch_count DESC LIMIT 10;")    

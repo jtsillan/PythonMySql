@@ -42,7 +42,10 @@ try:
             
             item_choice = input("Valitse yllä olevista vaihtoehdoista: (0), (1), jne: ")
             item_id = items[int(item_choice)]['id']
+            # PALAUTE
+            # TÄSTÄ TULEE MIINUSTA ISOSTI, KUN SULLA ON TUOLLA SQL-INJECTIONIN PAIKKA
             delete_query = (f"DELETE FROM items_has_actors WHERE items_id = {item_id} AND actors_id = {actor_id}")
+            print("########## delete", delete_query)
             cursor.execute(delete_query)
             connection.commit()                    
 

@@ -13,6 +13,8 @@ try:
     cursor.execute(check_category_query, (category, ))
 
     categories = cursor.fetchone()
+    # PALAUTE
+    # tämän rivin pitäisi olla vasta elsessä, koska jos categoriaa ei ole, siltä ei löydy id-saraketta
     category_id = categories['id']
 
     if categories is None:

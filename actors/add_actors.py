@@ -17,6 +17,14 @@ try:
 
     print("Lisätyn näyttelijän id on: ", cursor.lastrowid)
 
+# PALAUTE
+# tästä en sakoita, koska olet seurannut minun esimerkkiä aj minun tekemistä virheistä en anna miinusta.
+# mutta jatkossa on hyvä muistaa, että tämä excepct mysql.connector.Error lohko ottaa kiinni vaan yhidsämisessä tapahtuvat virheet
+# (jos esim tietokannan nimi olisi väärin, tai tietokantapalvelin pois päältä)
+# kaikki muut virheet, jotka voivat tapahtua, mutta eivät oel tietokannan yhdistysvirheitä, jäävät käsittelemättä
+# jos haluat olla laiska käytä except Exception as e, jotta saat kaikki virheet kiinni
+# tai sitten laita useampi except-lohko allekkain eri virhetyypeille
+
 
 except mysql.connector.Error as e:
     print(e)

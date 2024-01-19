@@ -1,5 +1,4 @@
-# python_mysql
-
+# Data Management course assigment for database connections
 
 
 ## Getting started
